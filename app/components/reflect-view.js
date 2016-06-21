@@ -1,0 +1,1 @@
+export { default } from 'reflect-ember/components/reflect-view';
