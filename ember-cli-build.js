@@ -7,9 +7,6 @@ module.exports = function(defaults) {
     // Add options here
   });
 
-  app.import('vendor/reflect.js');
-  app.import('vendor/reflect.css');
-
   /*
     This build file specifies the options for the dummy test app of this
     addon, located in `/tests/dummy`

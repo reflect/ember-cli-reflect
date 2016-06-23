@@ -5,8 +5,14 @@ export default Ember.Component.extend({
   layout,
 
   setup: Ember.on('didInsertElement', function() {
-    const ui = new ReflectUI(this.attrs.token);
+    const { parameters, token, project, view } = this.attrs;
 
-    ui.view(this.element, this.attrs.project, this.attrs.view);
+    let ui = new ReflectUI(token);
+
+    if (parameters) {
+      ui = ui.withParameters(parameters);
+    }
+
+    ui.view(this.element, project, view);
   }),
 });
