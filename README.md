@@ -1,26 +1,26 @@
 # Reflect Ember
 
-This README outlines the details of collaborating on this Ember addon.
+EmberCLI addon that provides a `reflect-view` component for rendering [Reflect](https://reflect.io) views into your Ember app.
+
+## Usage
+
+```handlebars
+{{ reflect-view
+    token="API_TOKEN"
+    project="project"
+    filters=filters
+    view="view-name" }}
+```
+
+### Supported attributes
+
+* `token`: A Reflect API token. Read-only tokens are suggested.
+* `view` (Required) the slug of the view to embed.
+* `project` (Required) the slug of the project in which this view lives.
+* `filters`: An array containing filter objects for this view.
+
+NOTE: You must supply either `token` or `parameters`.
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
-
-## Running
-
-* `ember server`
-* Visit your app at http://localhost:4200.
-
-## Running Tests
-
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
+TODO
