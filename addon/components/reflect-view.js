@@ -11,16 +11,18 @@ export default Ember.Component.extend({
       Ember.Logger.error('Please supply either token or an array of tokens.');
     }
 
-    let ui = new ReflectUI(token);
+    this.ui = new ReflectUI(token);
+  }),
 
+  doRender: Ember.on('didRender', function() {
     if (this.get('parameters')) {
-      ui.withParameters(this.get('parameters'));
+      this.ui.withParameters(this.get('parameters'));
     }
 
     if (this.get('filters')) {
-      ui.addFilters(this.get('filters'));
+      this.ui.addFilters(this.get('filters'));
     }
 
-    ui.view(this.element, this.get('project'), this.get('view'));
+    this.ui.view(this.element, this.get('project'), this.get('view'));
   }),
 });
