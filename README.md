@@ -26,4 +26,4 @@ NOTE: You must supply either `token` or `tokens`.
 
 ## Installation
 
-`npm install reflect-ember`
+`npm install ember-cli-reflect`
