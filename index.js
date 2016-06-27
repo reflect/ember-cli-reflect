@@ -9,7 +9,7 @@ const HEAD = '<script src="' + REFLECT_JAVASCRIPT + '" type="text/javascript"></
 <link rel="stylesheet" href="' + REFLECT_CSS + '">';
 
 module.exports = {
-  name: 'reflect-ember',
+  name: 'ember-cli-reflect',
   contentFor: function(type) {
     if (type === 'head') { return HEAD };
   }

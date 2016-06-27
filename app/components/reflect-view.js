@@ -1,1 +1,1 @@
-export { default } from 'reflect-ember/components/reflect-view';
+export { default } from 'ember-cli-reflect/components/reflect-view';
