@@ -1,7 +1,7 @@
 {
-  "name": "reflect-ember",
+  "name": "ember-cli-reflect",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Ember CLI addon for embedding Reflect views.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -15,7 +15,10 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": {
+    "name": "Reflect Engineering",
+    "url": "reflect.io"
+  },
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
@@ -38,7 +41,9 @@
     "loader.js": "^4.0.1"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "reflect",
+    "data visualization"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.6",

@@ -5,11 +5,13 @@ export default Ember.Component.extend({
   layout,
 
   setup: Ember.on('didInsertElement', function() {
-    if (!this.get('parameters') && !this.get('token')) {
-      Ember.Logger.error('Please supply either a token or parameters to reflect-view');
+    let token = this.get('token') || this.get('tokens');
+
+    if (!token) {
+      Ember.Logger.error('Please supply either token or an array of tokens.');
     }
 
-    let ui = new ReflectUI(this.get('token'));
+    let ui = new ReflectUI(token);
 
     if (this.get('parameters')) {
       ui.withParameters(this.get('parameters'));

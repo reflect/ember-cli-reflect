@@ -9,18 +9,21 @@ EmberCLI addon that provides a `reflect-view` component for rendering [Reflect](
     token="API_TOKEN"
     project="project"
     filters=filters
+    parameters=parameters
     view="view-name" }}
 ```
 
 ### Supported attributes
 
-* `token`: A Reflect API token. Read-only tokens are suggested.
+* `token`: (Required) A Reflect API token. Read-only tokens are suggested.
+* `tokens` A list of generated tokens.
 * `view` (Required) the slug of the view to embed.
 * `project` (Required) the slug of the project in which this view lives.
 * `filters`: An array containing filter objects for this view.
+* `parameters`: An array containing filter objects for this view.
 
-NOTE: You must supply either `token` or `parameters`.
+NOTE: You must supply either `token` or `tokens`.
 
 ## Installation
 
-TODO
+`npm install reflect-ember`
