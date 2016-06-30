@@ -4,7 +4,9 @@ import layout from '../templates/components/reflect-view';
 export default Ember.Component.extend({
   layout,
 
-  setup: Ember.on('didInsertElement', function() {
+  init: function() {
+    this._super();
+
     let token = this.get('token') || this.get('tokens');
 
     if (!token) {
@@ -12,9 +14,9 @@ export default Ember.Component.extend({
     }
 
     this.ui = new ReflectUI(token);
-  }),
+  },
 
-  doRender: Ember.on('didRender', function() {
+  didRender: function() {
     if (this.get('parameters')) {
       this.ui.withParameters(this.get('parameters'));
     }
@@ -24,5 +26,5 @@ export default Ember.Component.extend({
     }
 
     this.ui.view(this.element, this.get('project'), this.get('view'));
-  }),
+  }
 });
