@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     }
 
     if (this.get('filters')) {
-      this.ui.addFilters(this.get('filters'));
+      this.ui.withFilters(this.get('filters'));
     }
 
     this.ui.view(this.element, this.get('project'), this.get('view'));
