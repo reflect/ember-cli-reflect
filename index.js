@@ -1,7 +1,7 @@
 /* jshint node: true */
 'use strict';
 
-const REFLECT_JS_VERSION = '0.1.59',
+const REFLECT_JS_VERSION = '0.1.62',
       REFLECT_JAVASCRIPT = 'https://cdn.reflect.io/' + REFLECT_JS_VERSION +'/reflect.js',
       DEFAULT_CSS_SOURCE = 'https://cdn.reflect.io/' + REFLECT_JS_VERSION + '/reflect.css';
 
