@@ -2,15 +2,16 @@
 'use strict';
 
 const REFLECT_JS_VERSION = '0.1.59',
-      REFLECT_JAVASCRIPT = 'https://cdn.reflect.io/' + REFLECT_JS_VERSION +'/reflect.js';
+      REFLECT_JAVASCRIPT = 'https://cdn.reflect.io/' + REFLECT_JS_VERSION +'/reflect.js',
+      DEFAULT_CSS_SOURCE = 'https://cdn.reflect.io/' + REFLECT_JS_VERSION + '/reflect.css';
 
 const getHead = function(config) {
-  let cssSource;
+  var cssSource;
 
   if (config.reflect && config.reflect.css) {
     cssSource = config.reflect.css;
   } else {
-    cssSource = 'https://cdn.reflect.io/' + REFLECT_JS_VERSION + '/reflect.css';
+    cssSource = DEFAULT_CSS_SOURCE;
   }
 
   return '<script src="' + REFLECT_JAVASCRIPT + '" type="text/javascript"></script> \
@@ -21,7 +22,7 @@ module.exports = {
   name: 'ember-cli-reflect',
   contentFor: function(type) {
     if (type === 'head') {
-      let config = this.config();
+      var config = this.config();
 
       return getHead(config);
     };
