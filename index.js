@@ -20,10 +20,8 @@ const getHead = function(config) {
 
 module.exports = {
   name: 'ember-cli-reflect',
-  contentFor: function(type) {
+  contentFor: function(type, config) {
     if (type === 'head') {
-      var config = this.config();
-
       return getHead(config);
     };
   }
