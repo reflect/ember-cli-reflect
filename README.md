@@ -27,8 +27,27 @@ The addon can be configured through a `reflect` object in `config/environment.js
 * `project` (Required) the slug of the project in which this view lives.
 * `filters`: An array containing filter objects for this view.
 * `parameters`: An array containing filter objects for this view.
+* `events`: an object containing event callbacks for your components. See more below.
 
 NOTE: You must supply either `token` or `tokens`.
+
+#### Events
+
+Events allow you to tightly integrate your Reflect View with the app it's embedded within.
+Through the Ember component, events are set up through an `events` property that looks like this:
+
+```javascript
+{
+  componentSlug: {
+    eventType: [
+      function(data) {}
+    ]
+  }
+}
+```
+The keys of the parent object are the slugs of the components you wish to add events to.
+The values are objects as well, where the keys are event types, and the values are an array of callbacks
+for that event. Refer to our Reflect.js documentation for more information on events. https://reflect.io/docs/reference/reflect-js.html
 
 ## Installation
 
