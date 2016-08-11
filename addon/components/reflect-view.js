@@ -16,6 +16,15 @@ export default Ember.Component.extend({
     this.ui = new ReflectUI(token);
   },
 
+  _validate(prop, value) {
+    if (!value || typeof value !== 'string') {
+      Ember.Logger.error(`Please pass a valid ${prop}.`);
+      return true;
+    }
+
+    return false;
+  },
+
   didRender: function() {
     if (this.get('parameters')) {
       this.ui.withParameters(this.get('parameters'));
@@ -44,6 +53,13 @@ export default Ember.Component.extend({
       });
     }
 
-    this.ui.view(this.element, this.get('project'), this.get('view'));
+    const project = this.get('project'),
+        view = this.get('view');
+
+    if (this._validate('project', project) || this._validate('view', view)) {
+      return;
+    }
+
+    this.ui.view(this.element, project, view);
   }
 });
