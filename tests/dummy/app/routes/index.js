@@ -6,8 +6,8 @@ export default Ember.Route.extend({
     controller.set('viewName', 'list');
     controller.set('token', 'c77b12dd-a370-48be-9b94-ee388b14510c');
 
-    // timeseries is the slug of the component we're targeting.
-    // legendItemClick is the event we're going to handlers for.
+    // list is the slug of the component we're targeting.
+    // listItemClick is the event we're going to handlers for.
     let events = {
       list: {
         listItemClick: [
@@ -16,7 +16,7 @@ export default Ember.Route.extend({
             // changing the Reflect view that gets rendered.
             controller.set('viewName', 'simple-dashboard-view');
 
-            // This will set the filters to filter for the series we clicked on.
+            // Filter on the name field of the selected card.
             controller.set('filters', [
               {field: 'Name', op: '=', value: data.rowData.Name, removable: true}
             ]);
