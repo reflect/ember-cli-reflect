@@ -31,7 +31,7 @@ export default Ember.Component.extend({
     }
 
     if (this.get('overrides')) {
-      this.ui.withOverrides(this.get('filters'));
+      this.ui.withOverrides(this.get('overrides'));
     }
 
     if (this.get('filters')) {
