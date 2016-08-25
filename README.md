@@ -28,6 +28,7 @@ The addon can be configured through a `reflect` object in `config/environment.js
 * `filters`: An array containing filter objects for this view.
 * `parameters`: An array containing filter objects for this view.
 * `events`: an object containing event callbacks for your components. See more below.
+* `overrides` An array of objects that allow you to modify the Reflect view configuration at runtime.
 
 NOTE: You must supply either `token` or `tokens`.
 

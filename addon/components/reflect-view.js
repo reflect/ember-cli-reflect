@@ -30,6 +30,10 @@ export default Ember.Component.extend({
       this.ui.withParameters(this.get('parameters'));
     }
 
+    if (this.get('overrides')) {
+      this.ui.withOverrides(this.get('filters'));
+    }
+
     if (this.get('filters')) {
       this.ui.withFilters(this.get('filters'));
     }
