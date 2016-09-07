@@ -25,6 +25,8 @@ export default Ember.Route.extend({
       }
     };
 
+    controller.set('colors', { Name: { Colby: 'blue' } });
+
     // Example of using overrides to set the title on a component given its slug
     controller.set('overrides', [
       { slug: 'timeseries', path: 'title', value: 'My Overwritten Title' }

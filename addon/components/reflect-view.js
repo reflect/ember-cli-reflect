@@ -38,6 +38,10 @@ export default Ember.Component.extend({
       this.ui.withFilters(this.get('filters'));
     }
 
+    if (this.get('colors')) {
+      this.ui.withColors(this.get('colors'));
+    }
+
     // Events are defined as an object where keys are component slugs,
     // and values are objects with keys that are the event name and values
     // are arrays of callbacks.
