@@ -17,7 +17,9 @@ EmberCLI addon that provides a `reflect-view` component for rendering [Reflect](
 
 The addon can be configured through a `reflect` object in `config/environment.js`.
 
+* `version`: Version of Reflect.js to source from Reflect's CDN. Will be overwritten by either of the following settings:
 * `css`: CSS file to load instead of the default.
+* `js`: JS file to load instead of the default.
 
 ### Supported attributes
 
