@@ -42,27 +42,12 @@ export default Ember.Component.extend({
       this.ui.withColors(this.get('colors'));
     }
 
-    // Events are defined as an object where keys are component slugs,
-    // and values are objects with keys that are the event name and values
-    // are arrays of callbacks.
     if (this.get('events')) {
-      // Looping over each component slug.
-      Object.keys(this.events).forEach(slug => {
-        let eventTypes = this.events[slug];
-
-        // For this component, look over each event type.
-        Object.keys(eventTypes).forEach(eventType => {
-
-          // For each event type, setup all the callbacks.
-          eventTypes[eventType].map(cb => {
-            this.ui.on(slug, eventType, cb);
-          });
-        });
-      });
+      this.ui.withEvents(this.get('events'));
     }
 
-    const project = this.get('project'),
-        view = this.get('view');
+    const project = this.get('project');
+    const view = this.get('view');
 
     if (this._validate('project', project) || this._validate('view', view)) {
       return;
