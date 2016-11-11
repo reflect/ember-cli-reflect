@@ -39,7 +39,7 @@ export default Ember.Component.extend({
     }
 
     if (this.get('dates')) {
-      this.ui.withDates(this.get('dates').primary, this.get('dates').secondary);
+      this.ui.withDates(this.get('dates')[0], this.get('dates')[1]);
     }
 
     if (this.get('colors')) {

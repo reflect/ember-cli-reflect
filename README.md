@@ -28,7 +28,7 @@ The addon can be configured through a `reflect` object in `config/environment.js
 * `view` (Required) the slug of the view to embed.
 * `project` (Required) the slug of the project in which this view lives.
 * `filters`: An array containing filter objects for this view.
-* `dates`: An object containing primary and secondary date ranges.
+* `dates`: An array of date ranges. Each date range should itself be an array.
 * `parameters`: An array containing filter objects for this view.
 * `events`: an object containing event callbacks for your components. See more below.
 * `overrides`: An array of objects that allow you to modify the Reflect view configuration at runtime.
