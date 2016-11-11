@@ -25,12 +25,13 @@ export default Ember.Route.extend({
       }
     };
 
+    controller.set('dates', [['2016-11-01', '2016-11-08']]);
     controller.set('colors', { Name: { Colby: 'blue' } });
 
     // Example of using overrides to set the title on a component given its slug
     controller.set('overrides', [
       { slug: 'timeseries', path: 'title', value: 'My Overwritten Title' }
-    ])
+    ]);
 
     // We need to pass these event handlers to the Reflect component.
     controller.set('events', events);
