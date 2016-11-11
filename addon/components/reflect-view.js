@@ -38,6 +38,10 @@ export default Ember.Component.extend({
       this.ui.withFilters(this.get('filters'));
     }
 
+    if (this.get('dates')) {
+      this.ui.withDates(this.get('dates').primary, this.get('dates').secondary);
+    }
+
     if (this.get('colors')) {
       this.ui.withColors(this.get('colors'));
     }
