@@ -38,6 +38,10 @@ export default Ember.Component.extend({
       this.ui.withFilters(this.get('filters'));
     }
 
+    if (this.get('formatters')) {
+      this.ui.withFormatters(this.get('formatters'));
+    }
+
     if (this.get('dates')) {
       this.ui.withDates(this.get('dates')[0], this.get('dates')[1]);
     }
