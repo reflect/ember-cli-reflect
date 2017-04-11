@@ -42,6 +42,10 @@ export default Ember.Component.extend({
       this.ui.withFormatters(this.get('formatters'));
     }
 
+    if (this.get('tags')) {
+      this.ui.withTags(this.get('tags'));
+    }
+
     if (this.get('dates')) {
       this.ui.withDates(this.get('dates')[0], this.get('dates')[1]);
     }
