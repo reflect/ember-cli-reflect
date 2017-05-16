@@ -66,5 +66,9 @@ export default Ember.Component.extend({
     }
 
     this.ui.view(this.element, project, view);
+  },
+
+  willDestroyElement: function() {
+    this.ui.destroy(this.element);
   }
 });
