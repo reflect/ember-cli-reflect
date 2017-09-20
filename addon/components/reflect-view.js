@@ -58,6 +58,10 @@ export default Ember.Component.extend({
       this.ui.withEvents(this.get('events'));
     }
 
+    if (this.get('timezone')) {
+      this.ui.withTimezone(this.get('timezone'));
+    }
+
     const project = this.get('project');
     const view = this.get('view');
 

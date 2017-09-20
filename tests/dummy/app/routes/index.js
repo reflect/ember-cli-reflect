@@ -40,5 +40,7 @@ export default Ember.Route.extend({
 
     // We need to pass these event handlers to the Reflect component.
     controller.set('events', events);
+
+    controller.set('timezone', 'Europe/Moscow');
   }
 });
