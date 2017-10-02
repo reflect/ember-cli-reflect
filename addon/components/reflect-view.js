@@ -1,80 +1,126 @@
 import Ember from 'ember';
 import layout from '../templates/components/reflect-view';
 
-export default Ember.Component.extend({
+const {
+  assert,
+  Component,
+  get,
+  isArray,
+  Logger: { error },
+  set,
+} = Ember;
+
+export default Component.extend({
   layout,
 
-  init: function() {
-    this._super();
+  didRegisterInteractions: false,
 
-    let token = this.get('token') || this.get('tokens');
+  _applyInteractionCallbacks() {
+    if (get(this, 'didRegisterInteractions')) { return; }
 
-    if (!token) {
-      Ember.Logger.error('Please supply either token or an array of tokens.');
+    const interactions = get(this, 'interactions');
+    const whitelist = ['render', 'dataPointClick', 'legendItemClick', 'tableCellClick', 'componentClick', 'annotationClick'];
+
+    if (interactions) {
+      interactions.forEach(_i => {
+        const component = get(_i, 'component');
+        const interaction = get(_i, 'interaction');
+        const callback = get(_i, 'callback');
+
+        if (whitelist.indexOf(interaction) === -1) {
+          error(`<reflect-view:interactions>: '${interaction}' is not a valid interaction`);
+        }
+
+        this.ui.on(component, interaction, callback);
+      });
     }
 
-    this.ui = new ReflectUI(token);
+    set(this, 'didRegisterInteractions', true);
   },
 
   _validate(prop, value) {
     if (!value || typeof value !== 'string') {
-      Ember.Logger.error(`Please pass a valid ${prop}.`);
+      error(`Please pass a valid ${prop}.`);
       return true;
     }
 
     return false;
   },
 
-  didRender: function() {
-    if (this.get('parameters')) {
-      this.ui.withParameters(this.get('parameters'));
+  _validateString(prop) {
+    const value = get(this, prop);
+
+    return value && typeof value === 'string';
+  },
+
+  init() {
+    this._super();
+
+    let token = get(this, 'token') || get(this, 'tokens');
+
+    this.ui = new ReflectUI(token);
+  },
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    assert('<reflect-view:project>: Missing project slug', this._validateString('project'));
+    //assert('<reflect-view:view>: Missing project slug', this._validateString('view'));
+
+    const { dates } = this.getProperties('dates');
+
+    if (isArray(dates)) {
+      assert(`<reflect-view:date>: Expected [primaryRange, secondaryRange] but received ${JSON.stringify(dates)}`, dates.length <= 2);
+      dates.forEach(date => assert(`<reflect-view:date>: Expected array ['YYYY-MM-DD', 'YYYY-MM-DD'] but received value ${JSON.stringify(date)}`, isArray(date)));
+    }
+  },
+
+  didRender() {
+    if (get(this, 'parameters')) {
+      this.ui.withParameters(get(this, 'parameters'));
     }
 
-    if (this.get('overrides')) {
-      this.ui.withOverrides(this.get('overrides'));
+    if (get(this, 'overrides')) {
+      this.ui.withOverrides(get(this, 'overrides'));
     }
 
-    if (this.get('filters')) {
-      this.ui.withFilters(this.get('filters'));
+    if (get(this, 'filters')) {
+      this.ui.withFilters(get(this, 'filters'));
     }
 
-    if (this.get('formatters')) {
-      this.ui.withFormatters(this.get('formatters'));
+    if (get(this, 'formatters')) {
+      this.ui.withFormatters(get(this, 'formatters'));
     }
 
-    if (this.get('tags')) {
-      this.ui.withTags(this.get('tags'));
+    if (get(this, 'tags')) {
+      this.ui.withTags(get(this, 'tags'));
     }
 
-    if (this.get('dates')) {
-      this.ui.withDates(this.get('dates')[0], this.get('dates')[1]);
+    if (get(this, 'dates')) {
+      this.ui.withDates(get(this, 'dates')[0], get(this, 'dates')[1]);
     }
 
-    if (this.get('colors')) {
-      this.ui.withColors(this.get('colors'));
+    if (get(this, 'colors')) {
+      this.ui.withColors(get(this, 'colors'));
     }
 
-    if (this.get('events')) {
-      this.ui.withEvents(this.get('events'));
+    if (get(this, 'events')) {
+      this.ui.withEvents(get(this, 'events'));
     }
 
-    if (this.get('timezone')) {
-      this.ui.withTimezone(this.get('timezone'));
+    if (get(this, 'timezone')) {
+      this.ui.withTimezone(get(this, 'timezone'));
     }
 
-    const project = this.get('project');
-    const view = this.get('view');
+    this.ui.view(this.element, get(this, 'project'), get(this, 'view'));
 
-    if (this._validate('project', project) || this._validate('view', view)) {
-      return;
-    }
-
-    this.ui.view(this.element, project, view);
+    this._applyInteractionCallbacks();
   },
 
   willDestroyElement: function() {
     if (this.ui && this.ui.destroy) {
       this.ui.destroy(this.element);
+      set(this, 'didRegisterInteractions', false);
     }
   }
 });

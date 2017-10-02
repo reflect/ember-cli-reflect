@@ -1,4 +1,4 @@
-/* jshint node: true */
+/* eslint-env node */
 'use strict';
 
 const DEFAULT_ASSET_VERSION = 'latest';
@@ -33,6 +33,10 @@ module.exports = {
   contentFor: function(type, config) {
     if (type === 'head') {
       return getHead(config);
-    };
-  }
+    }
+  },
+
+  isDevelopingAddon() {
+    return true;
+  },
 };
