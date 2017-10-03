@@ -38,6 +38,9 @@ export default Controller.extend({
       interactions: [
         { slug: 'timeseries', interaction: 'dataPointClick', callback: (data) => this.send('filterTimeSeries', data) },
         { slug: 'timeseries', interaction: 'dataPointClick', callback: (data) => this.send('logClick', data) },
+        { slug: 'filters', interaction: 'addFilter', callback: (data) => log('Filter was added', data) },
+        { slug: 'filters', interaction: 'removeFilter', callback: (data) => this.send('removeFilters', data) },
+        { slug: 'datePicker', interaction: 'dateRangeChange', callback: (data) => log('Date range changed', data) },
       ]
     });
   },
@@ -61,6 +64,16 @@ export default Controller.extend({
 
     logClick(data) {
       log('I was clicked', data);
+    },
+
+    removeFilters(/*data*/) {
+      set(this, 'overrides', [
+        {
+          slug: 'timeseries',
+          path: 'title',
+          value: 'My Overwritten Title',
+        }
+      ]);
     }
   }
 

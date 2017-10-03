@@ -20,13 +20,18 @@ export default Component.extend({
     if (get(this, 'didRegisterInteractions')) { return; }
 
     const interactions = get(this, 'interactions');
-    const whitelist = ['render', 'dataPointClick', 'legendItemClick', 'tableCellClick', 'componentClick', 'annotationClick'];
+    const component_whitelist = ['render', 'dataPointClick', 'legendItemClick', 'tableCellClick', 'componentClick', 'annotationClick'];
+    const controls_whitelist = {
+      filters: ['addFilter', 'removeFilter'],
+      datePicker: ['dateRangeChange'],
+    };
 
     if (interactions) {
       interactions.forEach(_i => {
         const slug = get(_i, 'slug');
         const interaction = get(_i, 'interaction');
         const callback = get(_i, 'callback');
+        const whitelist = controls_whitelist[slug] || component_whitelist;
 
         assert('<reflect-view:interactions:slug>: Interactions must define a component slug', !isEmpty(slug));
         assert(`<reflect-view:interactions:interaction>: '${interaction}' is not a valid interaction`, whitelist.indexOf(interaction) > -1);
