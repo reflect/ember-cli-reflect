@@ -3,6 +3,8 @@ import moment from 'moment';
 
 const {
   Controller,
+  set,
+  Logger: { log },
 } = Ember;
 
 export default Controller.extend({
@@ -34,8 +36,8 @@ export default Controller.extend({
       ],
       timezone: 'Europe/Moscow',
       interactions: [
-        { component: 'timeseries', interaction: 'dataPointClick', callback: (data) => this.send('filterTimeSeries', data) },
-        { component: 'timeseries', interaction: 'dataPointClick', callback: (data) => this.send('logClick', data) },
+        { slug: 'timeseries', interaction: 'dataPointClick', callback: (data) => this.send('filterTimeSeries', data) },
+        { slug: 'timeseries', interaction: 'dataPointClick', callback: (data) => this.send('logClick', data) },
       ]
     });
   },
@@ -45,12 +47,20 @@ export default Controller.extend({
       this.setProperties({
         filters: [
           { field: 'Name', op: '=', value: data.rowData.Name, removable: true },
-        ]
+        ],
       });
+
+      set(this, 'overrides', [
+        {
+          slug: 'timeseries',
+          path: 'title',
+          value: data.rowData.Name,
+        }
+      ]);
     },
 
     logClick(data) {
-      Ember.Logger.log('I was clicked', data);
+      log('I was clicked', data);
     }
   }
 

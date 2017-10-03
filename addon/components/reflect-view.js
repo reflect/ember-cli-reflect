@@ -6,6 +6,7 @@ const {
   Component,
   get,
   isArray,
+  isEmpty,
   Logger: { error },
   set,
 } = Ember;
@@ -23,15 +24,15 @@ export default Component.extend({
 
     if (interactions) {
       interactions.forEach(_i => {
-        const component = get(_i, 'component');
+        const slug = get(_i, 'slug');
         const interaction = get(_i, 'interaction');
         const callback = get(_i, 'callback');
 
-        if (whitelist.indexOf(interaction) === -1) {
-          error(`<reflect-view:interactions>: '${interaction}' is not a valid interaction`);
-        }
+        assert('<reflect-view:interactions:slug>: Interactions must define a component slug', !isEmpty(slug));
+        assert(`<reflect-view:interactions:interaction>: '${interaction}' is not a valid interaction`, whitelist.indexOf(interaction) > -1);
+        assert('<reflect-view:interactions:callback>: callback must be a function', typeof callback === 'function');
 
-        this.ui.on(component, interaction, callback);
+        this.ui.on(slug, interaction, callback);
       });
     }
 
@@ -65,7 +66,6 @@ export default Component.extend({
     this._super(...arguments);
 
     assert('<reflect-view:project>: Missing project slug', this._validateString('project'));
-    //assert('<reflect-view:view>: Missing project slug', this._validateString('view'));
 
     const { dates } = this.getProperties('dates');
 
