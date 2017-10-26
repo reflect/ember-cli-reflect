@@ -8,6 +8,7 @@ const getCSSSource = ver => `https://cdn.reflect.io/${ver}/reflect.css`;
 const getHead = function(config) {
   let cssSource = getCSSSource(DEFAULT_ASSET_VERSION);
   let jsSource = getJSSource(DEFAULT_ASSET_VERSION);
+  let outputTag = '';
 
   if (config.reflect) {
     if (config.reflect.version) {
@@ -24,8 +25,20 @@ const getHead = function(config) {
     }
   }
 
-  return '<script src="' + jsSource  + '" type="text/javascript"></script> \
-<link rel="stylesheet" href="' + cssSource + '">';
+  let cssTag = `<link rel="stylesheet" href="${cssSource}">`;
+  let jsTag = `<script src="${jsSource}" type="text/javascript"></script>`;
+
+  if (config.reflect.excludeCss || config.reflect.excludeJs) {
+    if (config.reflect.excludeCss && !config.reflect.excludeJs) {
+      outputTag = jsTag;
+    } else if (!config.reflect.excludeCss && config.reflect.excludeJs) {
+      outputTag = cssTag;
+    }
+  } else {
+    outputTag = cssTag + jsTag;
+  }
+
+  return outputTag;
 };
 
 module.exports = {
