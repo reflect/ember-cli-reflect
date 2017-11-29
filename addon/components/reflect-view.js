@@ -70,7 +70,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    assert('<reflect-view:project>: Missing project slug', this._validateString('project'));
+    assert('<reflect-view:view>: Missing view identifier', this._validateString('view'));
 
     const { dates } = this.getProperties('dates');
 
@@ -81,6 +81,9 @@ export default Component.extend({
   },
 
   didRender() {
+    const project = get(this, 'project');
+    const view = get(this, 'view');
+
     if (get(this, 'parameters')) {
       this.ui.withParameters(get(this, 'parameters'));
     }
@@ -117,7 +120,11 @@ export default Component.extend({
       this.ui.withTimezone(get(this, 'timezone'));
     }
 
-    this.ui.view(this.element, get(this, 'project'), get(this, 'view'));
+    if (!project) {
+      this.ui.view(this.element, view);
+    } else {
+      this.ui.view(this.element, project, view);
+    }
 
     this._applyInteractionCallbacks();
   },
