@@ -12,7 +12,7 @@ test('it renders', function(assert) {
   this.set('token', ['']);
 
   this.render(hbs`
-    {{reflect-view project="LOkOQjwlTamH4fyQlHBu8A"}}
+    {{reflect-view view="LOkOQjwlTamH4fyQlHBu8A"}}
   `);
 
   assert.equal(this.$().text().trim(), '');

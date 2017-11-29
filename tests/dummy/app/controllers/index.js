@@ -13,9 +13,7 @@ export default Controller.extend({
     this._super(...arguments);
 
     this.setProperties({
-      project: 'reflect-productivity',
-      viewName: 'simple-dashboard-view',
-      token: 'c77b12dd-a370-48be-9b94-ee388b14510c',
+      view: 'ZFSzsfnRSpaMHL9Wae3lHw',
       // events: {
       //   timeseries: {
       //     dataPointClick: [
