@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-reflect",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "Ember CLI addon for embedding Reflect views.",
   "directories": {
     "doc": "doc",
