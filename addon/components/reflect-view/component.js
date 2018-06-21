@@ -1,15 +1,9 @@
-import Ember from 'ember';
 import layout from '../templates/components/reflect-view';
-
-const {
-  assert,
-  Component,
-  get,
-  isArray,
-  isEmpty,
-  Logger: { error },
-  set,
-} = Ember;
+import { assert } from '@ember/debug';
+import Component from '@ember/component';
+import { get, set } from '@ember/object';
+import { isArray } from '@ember/array';
+import { isEmpty } from '@ember/utils';
 
 export default Component.extend({
   layout,
@@ -46,7 +40,7 @@ export default Component.extend({
 
   _validate(prop, value) {
     if (!value || typeof value !== 'string') {
-      error(`Please pass a valid ${prop}.`);
+      console.error(`Please pass a valid ${prop}.`); //eslint-disable-line no-console
       return true;
     }
 
@@ -64,7 +58,7 @@ export default Component.extend({
 
     let token = get(this, 'token') || get(this, 'tokens');
 
-    this.ui = new ReflectUI(token);
+    this.ui = new ReflectUI(token);  //eslint-disable-line
   },
 
   didReceiveAttrs() {

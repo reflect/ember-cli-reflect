@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import moment from 'moment';
+import Controller from '@ember/controller';
+import { set } from '@ember/object';
 
 const {
-  Controller,
-  set,
   Logger: { log },
 } = Ember;
 
@@ -36,9 +36,9 @@ export default Controller.extend({
       interactions: [
         { slug: 'timeseries', interaction: 'dataPointClick', callback: (data) => this.send('filterTimeSeries', data) },
         { slug: 'timeseries', interaction: 'dataPointClick', callback: (data) => this.send('logClick', data) },
-        { slug: 'filters', interaction: 'addFilter', callback: (data) => log('Filter was added', data) },
+        { slug: 'filters', interaction: 'addFilter', callback: (data) => console.log('Filter was added', data) },  //eslint-disable-line no-console
         { slug: 'filters', interaction: 'removeFilter', callback: (data) => this.send('removeFilters', data) },
-        { slug: 'datePicker', interaction: 'dateRangeChange', callback: (data) => log('Date range changed', data) },
+        { slug: 'datePicker', interaction: 'dateRangeChange', callback: (data) => console.log('Date range changed', data) }, //eslint-disable-line no-console
       ]
     });
   },
@@ -61,7 +61,7 @@ export default Controller.extend({
     },
 
     logClick(data) {
-      log('I was clicked', data);
+      log('I was clicked', data);  //eslint-disable-line no-console
     },
 
     removeFilters(/*data*/) {
