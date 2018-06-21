@@ -1,4 +1,3 @@
-/* eslint-env node */
 'use strict';
 
 const DEFAULT_ASSET_VERSION = 'latest';
